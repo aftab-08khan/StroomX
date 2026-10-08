@@ -1,0 +1,1216 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <title>StroomX – Redefining EdTech</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #fff;
+            --soft: #f9fafb;
+            --ink: #111827;
+            --mute: #6b7280;
+            --line: #e5e7eb;
+            --acc: #4f46e5;
+            --acc2: #4338ca;
+            --tint: #eef2ff;
+            --f: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+            box-sizing: border-box;
+            padding-top: env(safe-area-inset-top, 0px);
+            padding-bottom: env(safe-area-inset-bottom, 0px)
+        }
+
+        :root[data-theme="light"] {
+            color-scheme: light
+        }
+
+        :root[data-theme="dark"] {
+            color-scheme: dark
+        }
+
+        @media (prefers-color-scheme:dark) {
+            :root:not([data-theme="light"]) {
+                --bg: #0b0f19;
+                --soft: #111827;
+                --ink: #f9fafb;
+                --mute: #9ca3af;
+                --line: #1f2937;
+                --acc: #818cf8;
+                --acc2: #a5b4fc;
+                --tint: #1e1b4b
+            }
+        }
+
+        :root[data-theme="dark"] {
+            --bg: #0b0f19;
+            --soft: #111827;
+            --ink: #f9fafb;
+            --mute: #9ca3af;
+            --line: #1f2937;
+            --acc: #818cf8;
+            --acc2: #a5b4fc;
+            --tint: #1e1b4b;
+            color-scheme: dark
+        }
+
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box
+        }
+
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 80px
+        }
+
+        body {
+            margin: 0;
+            background: var(--bg);
+            color: var(--ink);
+            font: 400 16px/1.7 var(--f);
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+            transition: background-color .35s ease, color .35s ease
+        }
+
+        h1,
+        h2,
+        h3 {
+            margin: 0;
+            line-height: 1.15;
+            letter-spacing: -.025em;
+            font-weight: 600
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none
+        }
+
+        :focus-visible {
+            outline: 2px solid var(--acc);
+            outline-offset: 3px;
+            border-radius: 6px
+        }
+
+        .w {
+            max-width: 1120px;
+            margin: 0 auto;
+            padding: 0 24px
+        }
+
+        section {
+            padding: 96px 0
+        }
+
+        .lead {
+            color: var(--mute);
+            font-size: 18px;
+            max-width: 560px
+        }
+
+        header {
+            position: fixed;
+            top: env(safe-area-inset-top, 0px);
+            left: 0;
+            right: 0;
+            z-index: 20;
+            transition: background .3s, box-shadow .3s
+        }
+
+        header.s {
+            background: color-mix(in srgb, var(--bg) 85%, transparent);
+            backdrop-filter: blur(12px);
+            box-shadow: 0 1px 0 var(--line)
+        }
+
+        nav {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 68px
+        }
+
+        .logo {
+            font-weight: 700;
+            font-size: 19px;
+            letter-spacing: -.02em
+        }
+
+        .logo b {
+            color: var(--acc)
+        }
+
+        .links {
+            display: flex;
+            align-items: center;
+            gap: 32px;
+            font-size: 14px;
+            font-weight: 500
+        }
+
+        .links a {
+            color: var(--mute);
+            transition: color .2s
+        }
+
+        .links a:hover {
+            color: var(--ink)
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 10px 18px;
+            border-radius: 8px;
+            background: var(--acc);
+            color: #fff !important;
+            font-weight: 600;
+            font-size: 14px;
+            border: 0;
+            cursor: pointer;
+            font-family: var(--f);
+            transition: background .2s, transform .2s
+        }
+
+        .btn:hover {
+            background: var(--acc2);
+            transform: translateY(-1px)
+        }
+
+        .btn.g {
+            background: none;
+            color: var(--ink) !important;
+            padding: 10px 4px
+        }
+
+        .btn.g:hover {
+            background: none;
+            color: var(--acc) !important;
+            transform: none
+        }
+
+        .btn span {
+            transition: transform .2s
+        }
+
+        .btn:hover span {
+            transform: translateX(3px)
+        }
+
+        .tog {
+            display: none;
+            background: none;
+            border: 0;
+            color: var(--ink);
+            font-size: 24px;
+            cursor: pointer
+        }
+
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 8px
+        }
+
+        .theme-toggle {
+            width: 40px;
+            height: 40px;
+            display: grid;
+            place-items: center;
+            border: 1px solid var(--line);
+            border-radius: 50%;
+            background: var(--bg);
+            color: var(--ink);
+            cursor: pointer;
+            transition: background-color .25s, color .25s, border-color .25s, transform .25s
+        }
+
+        .theme-toggle:hover {
+            color: var(--acc);
+            border-color: var(--acc);
+            transform: rotate(-10deg)
+        }
+
+        .theme-toggle svg {
+            width: 18px;
+            height: 18px;
+            fill: none;
+            stroke: currentColor;
+            stroke-width: 1.8;
+            stroke-linecap: round;
+            stroke-linejoin: round
+        }
+
+        .theme-toggle .sun,
+        :root[data-theme="dark"] .theme-toggle .moon {
+            display: none
+        }
+
+        :root[data-theme="dark"] .theme-toggle .sun {
+            display: block
+        }
+
+        .hero {
+            padding: 180px 0 120px;
+            position: relative;
+            isolation: isolate
+        }
+
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            align-items: center;
+            gap: 40px
+        }
+
+        .hero-art {
+            position: relative;
+            display: grid;
+            place-items: center;
+            min-width: 0;
+            animation: rise-in .8s .2s cubic-bezier(.2, .7, .2, 1) both
+        }
+
+        .hero-art::before {
+            content: "";
+            position: absolute;
+            width: min(90%, 440px);
+            aspect-ratio: 1;
+            border-radius: 50%;
+            background: radial-gradient(circle, var(--tint) 0 45%, transparent 72%);
+            z-index: -1
+        }
+
+        .hero-art img {
+            display: block;
+            width: 100%;
+            max-width: 560px;
+            height: auto;
+            filter: drop-shadow(0 24px 26px rgba(17, 24, 39, .14))
+        }
+
+        .hero::before {
+            content: "";
+            position: absolute;
+            inset: 0 0 auto;
+            height: 520px;
+            z-index: -1;
+            background: radial-gradient(60% 60% at 50% 0, var(--tint), transparent 70%);
+            animation: glow-drift 9s ease-in-out infinite alternate
+        }
+
+        .hero .pill,
+        .hero h1,
+        .hero .lead,
+        .hero .row {
+            animation: rise-in .7s cubic-bezier(.2, .7, .2, 1) both
+        }
+
+        .hero h1 {
+            animation-delay: .08s
+        }
+
+        .hero .lead {
+            animation-delay: .16s
+        }
+
+        .hero .row {
+            animation-delay: .24s
+        }
+
+        @keyframes rise-in {
+            from {
+                opacity: 0;
+                transform: translateY(18px)
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0)
+            }
+        }
+
+        @keyframes glow-drift {
+            from {
+                transform: translateY(-12px) scale(.98)
+            }
+
+            to {
+                transform: translateY(12px) scale(1.04)
+            }
+        }
+
+        .pill {
+            display: inline-block;
+            padding: 4px 14px;
+            border-radius: 99px;
+            border: 1px solid var(--line);
+            font-size: 13px;
+            color: var(--mute);
+            margin-bottom: 24px;
+            transition: border-color .2s
+        }
+
+        .pill:hover {
+            border-color: var(--acc)
+        }
+
+        h1 {
+            font-size: clamp(40px, 6vw, 68px);
+            font-weight: 700;
+            max-width: 760px
+        }
+
+        .hero .lead {
+            margin: 24px 0 36px;
+            font-size: 19px
+        }
+
+        .row {
+            display: flex;
+            gap: 16px;
+            align-items: center;
+            flex-wrap: wrap
+        }
+
+        .hd {
+            max-width: 600px;
+            margin-bottom: 56px
+        }
+
+        .hd h2 {
+            font-size: clamp(28px, 3.6vw, 40px)
+        }
+
+        .hd p {
+            color: var(--mute);
+            margin: 14px 0 0
+        }
+
+        .eb {
+            color: var(--acc);
+            font-weight: 600;
+            font-size: 14px;
+            margin-bottom: 10px
+        }
+
+        .cols {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 48px
+        }
+
+        .col .ic {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            background: var(--tint);
+            color: var(--acc);
+            display: grid;
+            place-items: center;
+            margin-bottom: 18px;
+            transition: background .25s, color .25s
+        }
+
+        .col:hover .ic {
+            background: var(--acc);
+            color: #fff
+        }
+
+        .ic svg {
+            width: 20px;
+            height: 20px;
+            stroke: currentColor;
+            fill: none;
+            stroke-width: 1.8;
+            stroke-linecap: round;
+            stroke-linejoin: round
+        }
+
+        .col h3 {
+            font-size: 18px;
+            margin-bottom: 8px
+        }
+
+        .col p {
+            margin: 0;
+            color: var(--mute);
+            font-size: 15px
+        }
+
+        .alt {
+            background: var(--soft);
+            border-block: 1px solid var(--line);
+            transition: background-color .35s ease, border-color .35s ease
+        }
+
+        .list {
+            border-top: 1px solid var(--line)
+        }
+
+        .item {
+            display: grid;
+            grid-template-columns: 220px 1fr auto;
+            gap: 32px;
+            align-items: center;
+            padding: 28px 12px;
+            border-bottom: 1px solid var(--line);
+            margin: 0 -12px;
+            border-radius: 10px;
+            transition: background .25s
+        }
+
+        .item:hover {
+            background: var(--bg)
+        }
+
+        .item h3 {
+            font-size: 18px
+        }
+
+        .item p {
+            margin: 0;
+            color: var(--mute);
+            font-size: 15px
+        }
+
+        .item .ar {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            border: 1px solid var(--line);
+            display: grid;
+            place-items: center;
+            color: var(--mute);
+            transition: .25s
+        }
+
+        .item:hover .ar {
+            background: var(--acc);
+            border-color: var(--acc);
+            color: #fff;
+            transform: translateX(4px)
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 32px;
+            text-align: left
+        }
+
+        .stats strong {
+            display: block;
+            font-size: clamp(34px, 4.5vw, 52px);
+            font-weight: 700;
+            letter-spacing: -.03em;
+            line-height: 1.1
+        }
+
+        .stats span {
+            color: var(--mute);
+            font-size: 15px
+        }
+
+        .q {
+            max-width: 760px
+        }
+
+        .q p {
+            font-size: clamp(22px, 2.8vw, 30px);
+            line-height: 1.4;
+            font-weight: 500;
+            letter-spacing: -.015em;
+            margin: 0 0 24px
+        }
+
+        .q small {
+            color: var(--mute);
+            font-size: 15px
+        }
+
+        .ct {
+            display: grid;
+            grid-template-columns: 1fr 1.1fr;
+            gap: 64px
+        }
+
+        .ct dl {
+            margin: 32px 0 0;
+            display: grid;
+            gap: 20px;
+            font-size: 15px
+        }
+
+        .ct dt {
+            font-weight: 600
+        }
+
+        .ct dd {
+            margin: 0;
+            color: var(--mute)
+        }
+
+        form {
+            display: grid;
+            gap: 18px
+        }
+
+        .form-art {
+            position: relative;
+            height: 190px;
+            overflow: hidden;
+            border: 1px solid var(--line);
+            border-radius: 14px;
+            background: var(--tint)
+        }
+
+        .form-art img {
+            display: block;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center 42%
+        }
+
+        .two {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px
+        }
+
+        label {
+            display: grid;
+            gap: 6px;
+            font-size: 14px;
+            font-weight: 500
+        }
+
+        input,
+        textarea {
+            font: 400 15px var(--f);
+            padding: 10px 14px;
+            border-radius: 8px;
+            border: 1px solid var(--line);
+            background: var(--bg);
+            color: var(--ink);
+            width: 100%;
+            transition: border-color .2s, box-shadow .2s
+        }
+
+        input:focus,
+        textarea:focus {
+            outline: 0;
+            border-color: var(--acc);
+            box-shadow: 0 0 0 3px color-mix(in srgb, var(--acc) 20%, transparent)
+        }
+
+        textarea {
+            min-height: 120px;
+            resize: vertical
+        }
+
+        .ok {
+            display: none;
+            color: var(--acc);
+            font-size: 14px;
+            font-weight: 500
+        }
+
+        footer {
+            border-top: 1px solid var(--line);
+            padding: 36px 0;
+            color: var(--mute);
+            font-size: 14px
+        }
+
+        footer .w {
+            display: flex;
+            justify-content: space-between;
+            gap: 16px;
+            flex-wrap: wrap;
+            margin-top: 24px
+        }
+
+        footer nav {
+            height: auto;
+            gap: 24px;
+            display: flex
+        }
+
+        .social {
+            display: grid;
+            gap: 8px;
+            justify-items: start
+        }
+
+        .social-label {
+            color: var(--ink);
+            font-size: 13px;
+            font-weight: 600
+        }
+
+        .social-links {
+            display: flex;
+            gap: 8px
+        }
+
+        .social-links a {
+            width: 36px;
+            height: 36px;
+            display: grid;
+            place-items: center;
+            border: 1px solid var(--line);
+            border-radius: 50%;
+            color: var(--mute);
+            transition: color .2s, border-color .2s, background-color .2s, transform .2s
+        }
+
+        .social-links a:hover {
+            color: var(--acc);
+            border-color: var(--acc);
+            background: var(--tint);
+            transform: translateY(-2px)
+        }
+
+        .social-links svg {
+            width: 16px;
+            height: 16px;
+            fill: currentColor
+        }
+
+        footer a:hover {
+            color: var(--ink)
+        }
+
+        .rv {
+            opacity: 0;
+            transform: translateY(16px);
+            transition: opacity .7s, transform .7s cubic-bezier(.2, .7, .2, 1)
+        }
+
+        .rv.in {
+            opacity: 1;
+            transform: none
+        }
+
+        .cols .rv:nth-child(2) {
+            transition-delay: .08s
+        }
+
+        .cols .rv:nth-child(3) {
+            transition-delay: .16s
+        }
+
+
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px
+        }
+
+        .card {
+            background: var(--bg);
+            border: 1px solid var(--line);
+            border-radius: 16px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            transition: transform .3s, box-shadow .3s, border-color .3s, background-color .35s ease
+        }
+
+        .card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 24px 40px -24px rgba(17, 24, 39, .35);
+            border-color: var(--c)
+        }
+
+        .im {
+            aspect-ratio: 16/10;
+            background: color-mix(in srgb, var(--c) 14%, var(--bg));
+            color: var(--c);
+            display: grid;
+            place-items: center;
+            overflow: hidden;
+            position: relative
+        }
+
+        .im svg {
+            width: 74%;
+            height: auto;
+            transition: transform .5s cubic-bezier(.2, .7, .2, 1)
+        }
+
+        .im img {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            padding: 8px;
+            object-fit: contain;
+            transition: transform .5s cubic-bezier(.2, .7, .2, 1)
+        }
+
+        .card:hover .im svg {
+            transform: scale(1.07) rotate(-2deg)
+        }
+
+        .card:hover .im img {
+            transform: scale(1.04)
+        }
+
+        .im .w2 {
+            fill: var(--bg)
+        }
+
+        .im .st {
+            stroke: currentColor;
+            fill: none;
+            stroke-width: 6;
+            stroke-linecap: round;
+            stroke-linejoin: round
+        }
+
+        .bd {
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            flex: 1
+        }
+
+        .tg {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--c)
+        }
+
+        .bd h3 {
+            font-size: 19px
+        }
+
+        .bd p {
+            margin: 0;
+            color: var(--mute);
+            font-size: 15px;
+            flex: 1
+        }
+
+        .go {
+            margin-top: 12px;
+            font-size: 14px;
+            font-weight: 600;
+            display: inline-flex;
+            gap: 6px
+        }
+
+        .go span {
+            transition: transform .2s
+        }
+
+        .card:hover .go span {
+            transform: translateX(4px)
+        }
+
+        @media (max-width:860px) {
+            .cards {
+                grid-template-columns: 1fr 1fr
+            }
+        }
+
+        @media (max-width:560px) {
+            .cards {
+                grid-template-columns: 1fr
+            }
+        }
+
+        @media (max-width:860px) {
+            section {
+                padding: 72px 0
+            }
+
+            .hero {
+                padding: 140px 0 80px
+            }
+
+            .hero-grid {
+                grid-template-columns: 1fr;
+                gap: 28px
+            }
+
+            .hero-art img {
+                max-width: 440px
+            }
+
+            .cols,
+            .ct {
+                grid-template-columns: 1fr;
+                gap: 36px
+            }
+
+            .stats {
+                grid-template-columns: 1fr 1fr
+            }
+
+            .item {
+                grid-template-columns: 1fr auto;
+                gap: 8px 16px
+            }
+
+            .item p {
+                grid-column: 1
+            }
+
+            .item .ar {
+                grid-row: 1;
+                grid-column: 2
+            }
+
+            .tog {
+                display: block
+            }
+
+            .theme-toggle {
+                width: 38px;
+                height: 38px
+            }
+
+            .links {
+                position: fixed;
+                inset: 68px 16px auto;
+                flex-direction: column;
+                align-items: stretch;
+                gap: 4px;
+                background: var(--bg);
+                border: 1px solid var(--line);
+                border-radius: 12px;
+                padding: 12px;
+                opacity: 0;
+                pointer-events: none;
+                transform: translateY(-8px);
+                transition: .2s
+            }
+
+            .links.o {
+                opacity: 1;
+                pointer-events: auto;
+                transform: none
+            }
+
+            .links a {
+                padding: 10px 12px
+            }
+
+            .links .btn {
+                justify-content: center
+            }
+        }
+
+        @media (max-width:520px) {
+            .two {
+                grid-template-columns: 1fr
+            }
+        }
+
+        @media (prefers-reduced-motion:reduce) {
+            * {
+                transition: none !important;
+                scroll-behavior: auto !important
+            }
+
+            .rv,
+            .hero .pill,
+            .hero h1,
+            .hero .lead,
+            .hero .row {
+                animation: none !important;
+                opacity: 1;
+                transform: none
+            }
+
+            .hero-art {
+                animation: none !important
+            }
+
+            .hero::before {
+                animation: none
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header id="hd">
+        <div class="w">
+            <nav>
+                <a class="logo" href="#top">Stroom<b>X</b></a>
+                <div class="links" id="links">
+                    <a href="#what">What we do</a><a href="#brands">Brands</a><a href="#impact">Impact</a><a
+                        href="#team">Team</a><a href="https://stroomx.com/conference">Conference</a>
+                    <a class="btn" href="#contact">Contact us</a>
+                </div>
+                <div class="nav-actions">
+                    <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Switch to dark mode"
+                        title="Switch to dark mode">
+                        <svg class="moon" viewBox="0 0 24 24" aria-hidden="true">
+                            <path d="M20.9 13A9 9 0 0 1 11 3.1 9 9 0 1 0 20.9 13Z" />
+                        </svg>
+                        <svg class="sun" viewBox="0 0 24 24" aria-hidden="true">
+                            <circle cx="12" cy="12" r="4" />
+                            <path d="M12 2v2m0 16v2M4.93 4.93l1.42 1.42m11.3 11.3 1.42 1.42M2 12h2m16 0h2M4.93 19.07l1.42-1.42m11.3-11.3 1.42-1.42" />
+                        </svg>
+                    </button>
+                    <button class="tog" id="tog" aria-label="Toggle menu">☰</button>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <main id="top">
+        <section class="hero">
+            <div class="w hero-grid">
+                <div class="hero-copy">
+                    <a class="pill" href="#brands">Franchisor of Bricks4kidz®, Bricks4schoolz® and Sew Fun Studios®</a>
+                    <h1>Redefining education through hands-on STEAM learning.</h1>
+                    <p class="lead">We support over 450 franchisees in more than 36 countries, helping them turn traditional
+                        centers into engaging STEM workshops.</p>
+                    <div class="row"><a class="btn" href="#brands">Explore our brands <span>→</span></a><a class="btn g"
+                            href="#contact">Get in touch <span>→</span></a></div>
+                </div>
+                <div class="hero-art">
+                    <img src="assests/GirlsWEDOAirplane-min.png" alt="Children learning and building a robotics project together">
+                </div>
+            </div>
+        </section>
+
+        <section id="what" style="padding-top:40px">
+            <div class="w">
+                <div class="hd rv">
+                    <div class="eb">What we do</div>
+                    <h2>Everything a franchisee needs to teach 21st century skills</h2>
+                    <p>We provide the resources to run workshops equipped with the latest science, technology,
+                        engineering and math tools.</p>
+                </div>
+                <div class="cols">
+                    <div class="col rv">
+                        <div class="ic"><svg viewBox="0 0 24 24">
+                                <path d="M4 19V6a2 2 0 0 1 2-2h13v13H6a2 2 0 0 0-2 2zm0 0a2 2 0 0 0 2 2h13M9 8h6" />
+                            </svg></div>
+                        <h3>Curriculum</h3>
+                        <p>Hundreds of model builds that progress from early learning to robotics and coding, for
+                            classes, field trips, workshops, parties and camps.</p>
+                    </div>
+                    <div class="col rv">
+                        <div class="ic"><svg viewBox="0 0 24 24">
+                                <path d="M3 11v3l14 5V6L3 11zm14-1a3 3 0 0 1 0 5M7 14v5" />
+                            </svg></div>
+                        <h3>Marketing</h3>
+                        <p>Corporate marketing programs, training and continuing education that help franchisees build
+                            sustainable businesses.</p>
+                    </div>
+                    <div class="col rv">
+                        <div class="ic"><svg viewBox="0 0 24 24">
+                                <rect x="3" y="4" width="18" height="12" rx="2" />
+                                <path d="M8 20h8M12 16v4" />
+                            </svg></div>
+                        <h3>Technology</h3>
+                        <p>Our own Franchise Management System handles bookings, payments and day-to-day management.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="alt" id="brands">
+            <div class="w">
+                <div class="hd rv">
+                    <div class="eb">Our brands</div>
+                    <h2>Educational brands for students around the world</h2>
+                </div>
+                <div class="cards rv"><a class="card" href="https://www.bricks4kidz.com/" style="--c:#4f46e5">
+                        <div class="im"><img src="assests/logo-b4k-1.jpg" alt="Bricks 4 Kidz logo" loading="lazy"></div>
+                        <div class="bd">
+                            <div class="tg">Flagship</div>
+                            <h3>Bricks 4 Kidz</h3>
+                            <p>Classes where children learn, build and play with LEGO® bricks, using our proprietary
+                                model plans.</p><span class="go">Visit site <span>→</span></span>
+                        </div>
+                    </a><a class="card" href="https://www.bricks4kidzelearn.com/" style="--c:#0d9488">
+                        <div class="im"><img src="assests/logo-b4e.jpg" alt="Bricks 4 Kidz E-Learn logo" loading="lazy"></div>
+                        <div class="bd">
+                            <div class="tg">Online</div>
+                            <h3>Bricks 4 Kidz E-Learn</h3>
+                            <p>A web-based platform with a building kit shipped to students, plus new custom models
+                                every week.</p><span class="go">Visit site <span>→</span></span>
+                        </div>
+                    </a><a class="card" href="https://www.bricks4biz.com/" style="--c:#e11d48">
+                        <div class="im"><img src="assests/logo-b4b-1.jpg" alt="Bricks 4 Biz logo" loading="lazy"></div>
+                        <div class="bd">
+                            <div class="tg">Team building</div>
+                            <h3>Bricks 4 Biz</h3>
+                            <p>LEGO® team-building that improves communication, morale and trust for businesses of all
+                                sizes.</p><span class="go">Visit site <span>→</span></span>
+                        </div>
+                    </a><a class="card" href="https://www.bricks4schoolz.com/" style="--c:#2563eb">
+                        <div class="im"><img src="assests/logo-b4s.png" alt="Bricks 4 Schoolz logo" loading="lazy"></div>
+                        <div class="bd">
+                            <div class="tg">Robotics</div>
+                            <h3>Bricks 4 Schoolz</h3>
+                            <p>A robotics kit with technic parts, a motor and a battery pack for thousands of unique
+                                models.</p><span class="go">Visit site <span>→</span></span>
+                        </div>
+                    </a><a class="card" href="https://www.sewfunstudios.com/" style="--c:#db2777">
+                        <div class="im"><img src="assests/logo-sfs.jpg" alt="Sew Fun Studios logo" loading="lazy"></div>
+                        <div class="bd">
+                            <div class="tg">Creative</div>
+                            <h3>Sew Fun Studios</h3>
+                            <p>Sewing and design principles taught through project-based classes, camps and parties.</p>
+                            <span class="go">Visit site <span>→</span></span>
+                        </div>
+                    </a><a class="card" href="https://us.bricks4kidznow.com" style="--c:#d97706">
+                        <div class="im"><img src="assests/logo-fms.jpg" alt="BFK Franchise Management System logo" loading="lazy"></div>
+                        <div class="bd">
+                            <div class="tg">Software</div>
+                            <h3>BFK FMS</h3>
+                            <p>The Franchise Management System that streamlines booking, payments and operations.</p>
+                            <span class="go">Visit site <span>→</span></span>
+                        </div>
+                    </a></div>
+            </div>
+        </section>
+
+        <section id="impact">
+            <div class="w">
+                <div class="stats rv">
+                    <div><strong data-n="450" data-s="+">0</strong><span>Franchisees</span></div>
+                    <div><strong data-n="37" data-s="">0</strong><span>Countries</span></div>
+                    <div><strong data-n="1" data-s="M+">0</strong><span>Students reached</span></div>
+                    <div><strong data-n="6" data-s="">0</strong><span>Educational brands</span></div>
+                </div>
+            </div>
+        </section>
+
+        <section class="alt" id="team">
+            <div class="w q rv">
+                <div class="eb">Our team</div>
+                <p>“We are a group of entrepreneurs, teachers, architects and engineering professionals promoting Design
+                    Thinking and Challenge-based Learning among children through our STEAM-based 21st Century Learning
+                    program.”</p>
+                <small>The StroomX team</small>
+            </div>
+        </section>
+
+        <section id="contact">
+            <div class="w ct">
+                <div class="rv">
+                    <div class="eb">Contact</div>
+                    <h2 style="font-size:clamp(28px,3.6vw,40px)">Get in touch</h2>
+                    <p class="lead" style="font-size:16px;margin-top:14px">Questions or need support? Send a message and
+                        a team member will reply as soon as possible.</p>
+                    <dl>
+                        <div>
+                            <dt>Address</dt>
+                            <dd>StroomX LLC, 860 Hillview Ct, Suite 310, Milpitas, CA 95035</dd>
+                        </div>
+                        <div>
+                            <dt>Phone</dt>
+                            <dd>1-888-STR-00-MX (toll free 1-888-787-0069)</dd>
+                        </div>
+                        <div>
+                            <dt>Hours</dt>
+                            <dd>9 AM – 6 PM, Monday to Friday</dd>
+                        </div>
+                    </dl>
+                </div>
+                <form class="rv" id="form">
+                    <div class="form-art">
+                        <img src="assests/8-BRICKS-4-KIDZ-Australia-Franchise-Business-LEGO-Kids-Fun-Education-STEM-Coding.jpeg" alt="Children exploring robotics and hands-on learning" loading="lazy">
+                    </div>
+                    <div class="two"><label>First name<input required autocomplete="given-name"></label><label>Last
+                            name<input required autocomplete="family-name"></label></div>
+                    <label>Email<input type="email" required autocomplete="email"></label>
+                    <label>Message<textarea required></textarea></label>
+                    <div class="row"><button class="btn" type="submit">Send message</button><span class="ok"
+                            id="ok">Message sent. We'll be in touch soon.</span></div>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="w">
+            <div>© 2026 StroomX LLC. LEGO® is a registered trademark of the LEGO Group, which does not sponsor or
+                endorse these programs.</div>
+            <nav><a href="https://stroomx.com/latest-news/">Latest news</a><a
+                    href="https://stroomx.com/privacy-policy-2/">Privacy policy</a></nav>
+            <div class="social">
+                <span class="social-label">Share StroomX</span>
+                <div class="social-links" aria-label="Share StroomX on social media">
+                    <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fstroomx.com%2F"
+                        target="_blank" rel="noopener noreferrer" aria-label="Share StroomX on Facebook"
+                        title="Share on Facebook">
+                        <svg viewBox="0 0 24 24" aria-hidden="true">
+                            <path d="M13.5 21v-8.2h2.8l.4-3.2h-3.2v-2c0-.9.3-1.5 1.6-1.5h1.7V3.2c-.3 0-1.4-.2-2.6-.2-2.6 0-4.4 1.6-4.4 4.5v2.5H7v3.2h2.8V21z" />
+                        </svg>
+                    </a>
+                    <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Fstroomx.com%2F"
+                        target="_blank" rel="noopener noreferrer" aria-label="Share StroomX on LinkedIn"
+                        title="Share on LinkedIn">
+                        <svg viewBox="0 0 24 24" aria-hidden="true">
+                            <path d="M5.2 3.5a1.8 1.8 0 1 0 0 3.6 1.8 1.8 0 0 0 0-3.6ZM3.6 9h3.2v11H3.6zm5.2 0h3.1v1.5h.1a3.4 3.4 0 0 1 3.1-1.7c3.3 0 3.9 2.2 3.9 5v6.2h-3.2v-5.5c0-1.3 0-3-1.9-3s-2.1 1.4-2.1 2.9V20H8.8z" />
+                        </svg>
+                    </a>
+                    <a href="https://twitter.com/intent/tweet?url=https%3A%2F%2Fstroomx.com%2F&amp;text=Discover%20StroomX"
+                        target="_blank" rel="noopener noreferrer" aria-label="Share StroomX on X"
+                        title="Share on X">
+                        <svg viewBox="0 0 24 24" aria-hidden="true">
+                            <path d="M18.9 2H22l-6.8 7.8L23.2 22h-6.3L12 14.6 5.6 22H2.4l7.3-8.4L1.9 2h6.4l4.5 6.8zm-1.1 18h1.7L7.4 3.9H5.6z" />
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const hd = document.getElementById('hd');
+        addEventListener('scroll', () => hd.classList.toggle('s', scrollY > 10), {passive: true});
+        const L = document.getElementById('links');
+        document.getElementById('tog').onclick = () => L.classList.toggle('o');
+        L.querySelectorAll('a').forEach(a => a.onclick = () => L.classList.remove('o'));
+        const themeToggle = document.getElementById('theme-toggle');
+        const savedTheme = localStorage.getItem('stroomx-theme');
+        const initialTheme = savedTheme || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+        document.documentElement.dataset.theme = initialTheme;
+        const updateThemeToggle = theme => {
+            const nextTheme = theme === 'dark' ? 'light' : 'dark';
+            themeToggle.setAttribute('aria-label', `Switch to ${nextTheme} mode`);
+            themeToggle.setAttribute('title', `Switch to ${nextTheme} mode`);
+        };
+        updateThemeToggle(initialTheme);
+        themeToggle.onclick = () => {
+            const nextTheme = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark';
+            document.documentElement.dataset.theme = nextTheme;
+            localStorage.setItem('stroomx-theme', nextTheme);
+            updateThemeToggle(nextTheme);
+        };
+        const io = new IntersectionObserver(es => es.forEach(e => {
+            if (!e.isIntersecting) return; e.target.classList.add('in');
+            e.target.querySelectorAll('[data-n]').forEach(c => {
+                const n = +c.dataset.n, t0 = performance.now();
+                (function f(t) {const p = Math.min((t - t0) / 1200, 1); c.textContent = Math.round(n * (1 - Math.pow(1 - p, 3))) + c.dataset.s; if (p < 1) requestAnimationFrame(f)})(t0)
+            });
+            io.unobserve(e.target)
+        }), {threshold: .15});
+        document.querySelectorAll('.rv').forEach(e => io.observe(e));
+        document.getElementById('form').onsubmit = e => {e.preventDefault(); document.getElementById('ok').style.display = 'inline'; e.target.reset()};
+    </script>
+</body>
+
+</html>
